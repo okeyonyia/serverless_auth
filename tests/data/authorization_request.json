@@ -1,0 +1,5 @@
+{
+  "type": "TOKEN",
+  "authorizationToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJkZXYubXlhcHAuYWkiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjIsIm93bmVyX3V1aWQiOiJhLWItYy1kIn0.eeffm8wEHiYljAbrPBaFonBCBRwb-LrCU-cKmZeQjPU",
+  "methodArn": "arn:aws:execute-api:us-east-1:349228585176:aovoxtdoh3/backend_api_gw_stage_dev/GET/api/a-b-c-d/property/"
+}

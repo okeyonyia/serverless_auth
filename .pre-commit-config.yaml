@@ -1,0 +1,35 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-ast
+      - id: check-json
+      - id: check-merge-conflict
+      - id: check-toml
+      - id: check-yaml
+      - id: debug-statements
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+  - repo: local
+    hooks:
+      - id: black
+        name: Formatting
+        entry: poetry run black
+        types: [python]
+        language: system
+      - id: ruff
+        name: Lint
+        entry: poetry run ruff check .
+        types: [python]
+        language: system
+      - id: pyright
+        name: Typing
+        entry: poetry run pyright
+        types: [python]
+        language: system
+      - id: pytest
+        name: Unittests
+        entry: poetry run pytest
+        types: [python]
+        language: system

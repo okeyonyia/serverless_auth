@@ -1,0 +1,48 @@
+[tool.poetry]
+name = "authorizer-lambda"
+version = "0.1.0"
+description = ""
+authors = ["Dolf Andringa <dolfandringa@gmail.com>"]
+readme = "README.md"
+packages = [{include = "authorizer_lambda", from = "src"}]
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.12"
+pydantic = {extras = ["email","dotenv"], version = "^1.10.7"}
+pyjwt = {version = "^2.7.0", extras = ["crypto"]}
+boto3 = "^1.28.3"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.1.0"
+pyright = "^1.1.298"
+pytest-mock = "^3.10.0"
+mock = "^5.0.1"
+pytest = "^7.2.2"
+pytest-asyncio = "^0.20.3"
+pytest-cov = "^4.0.0"
+python-lsp-server = "^1.7.2"
+jedi-language-server = "^0.40.0"
+types-boto3 = "^1.0.2"
+httpx = "^0.24.0"
+pytest-parallel = "^0.1.1"
+py = "^1.11.0"
+ruff = "^0.0.272"
+boto3-stubs = {version = "^1.28.0", extras = ["cognito", "apigateway", "lambda", "essential"]}
+pre-commit = "^3.3.3"
+
+[tool.pytest.ini_options]
+addopts = [
+    "--import-mode=importlib",
+    "--cov=authorizer_lambda",
+    "--cov-fail-under=80",
+    "--cov-report=term-missing",
+    "--workers", "2",
+    "--ignore=package",
+    "--ignore=dist"
+]
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

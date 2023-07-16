@@ -1,0 +1,77 @@
+name: CI
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  dependencies:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+          cache: "poetry"
+      - name: Install dependencies
+        run: poetry install
+
+  lint:
+    needs: [dependencies]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+          cache: "poetry"
+      - name: Run ruff
+        run: poetry run ruff check .
+
+  typing:
+    needs: [dependencies]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+          cache: "poetry"
+      - name: Run tests
+        run: poetry run pyright
+
+  test:
+    needs: [dependencies]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+          cache: "poetry"
+      - name: Run tests
+        run: poetry run pytest --no-cov
+
+  coverage:
+    needs: [dependencies]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+          cache: "poetry"
+      - name: Check code coverage
+        run: poetry run pytest
