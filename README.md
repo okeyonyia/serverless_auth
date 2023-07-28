@@ -1,7 +1,7 @@
 # Authorization Lambda assignment
 
 ## Note on Github use
-NOTE: please do NOT fork this repository on Github. This would give an advantage to people who still have to do this assignment. 
+NOTE: please do NOT fork this repository on Github. This would give an advantage to people who still have to do this assignment.
 You can clone the repository locally, then make your own Github repository, and push the code there with
 
 ```
@@ -33,7 +33,7 @@ The request coming in to this lambda is [defined by AWS in their docs](https://d
 
 Access to the backend urls is based on the `owner_uuid` attribute of the user.
 * For the dev token, this is part of the payload of the JWT token.
-* For the Cognito token, you should lookup the token by retrieving it from another lambda. The arn for that lambda is available in [the config](src/authorizer_lambda/config.py), and the expected request and response from the lambda are defined as the `OwnerRequest` and `OwnerResponse` in [the models](src/authorizer_lambda/models.py). Your code should assume this lambda exists. But since it doesn't (at least not in a way that is accessible to you), you write both the code to call the lambda, and to make unittests which mock the library that handles the lambda's request/response. 
+* For the Cognito token, you should lookup the `owner_uuid` by retrieving it from another lambda, based on the `sub` field from the payload of the JWT token. The arn for that lambda is available in [the config](src/authorizer_lambda/config.py), and the expected request and response from the lambda are defined as the `OwnerRequest` and `OwnerResponse` in [the models](src/authorizer_lambda/models.py). Your code should assume this lambda exists. But since it doesn't (at least not in a way that is accessible to you), you write both the code to call the lambda, and to make unittests which mock the library that handles the lambda's request/response.
 
 The output of your code should contain a policy based on the methodArn, allowing `arn:aws:execute-api:us-east-1:349228585176:aovoxtdoh3/sunrise_backend_api_gw_stage_dev/*/api/{owner_uuid}/*`
 
