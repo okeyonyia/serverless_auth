@@ -21,9 +21,15 @@ def handler(event, context) -> dict[str, Any]:
     Handle the incoming authorization requests, verify the token and return the
     policy for API Gateway
     """
+    verify_dev_token(event['authorizationToken'])
 
     authorization_request: TokenAuthorizationRequest = (
         TokenAuthorizationRequest.parse_obj(event)
     )
 
-    return {}
+    return {'principalId': 'a-b-c-d', 'policyDocument': {'Version': '2012-10-17', 'Statement': [{'Action': 'execute-api:Invoke', 'Effect': 'Allow', 'Resource': 'arn:aws:execute-api:us-east-1:349228585176:aovoxtdoh3/backend_api_gw_stage_dev/*/api/a-b-c-d/*'}]}, 'context': {}}
+
+
+def verify_dev_token(token):
+    # verify token
+    return ""
