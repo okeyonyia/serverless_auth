@@ -2,13 +2,16 @@ import unittest
 from authorizer_lambda.policy import generate_policy
 from authorizer_lambda.models import PolicyDocument, StatementEffect
 
+
 class TestGeneratePolicy(unittest.TestCase):
     def test_generate_policy(self):
         principal_id = "user123"
         method_arn = "some_method_arn"
         owner_uuid = "owner123"
 
-        policy = generate_policy(principal_id, method_arn, owner_uuid, {"owner_uuid": owner_uuid})
+        policy = generate_policy(
+            principal_id, method_arn, owner_uuid, {"owner_uuid": owner_uuid}
+        )
         policyDocument = policy.policyDocument
         self.assertIsInstance(policyDocument, PolicyDocument)
         self.assertEqual(policyDocument.Statement[0].Effect, StatementEffect.ALLOW)

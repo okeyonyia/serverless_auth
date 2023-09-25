@@ -1,5 +1,6 @@
 import jwt
 
+
 def is_dev_token(token, dev_issuer="dev.myapp.ai"):
     """
     Check if the given JWT token is a dev token.
@@ -17,10 +18,11 @@ def is_dev_token(token, dev_issuer="dev.myapp.ai"):
     except jwt.DecodeError:
         return False
 
+
 def verify_dev_token(token, secret):
     try:
-        payload = jwt.decode(token, secret, algorithms=['HS256'])
-        if payload['iss'] != 'dev.myapp.ai':
+        payload = jwt.decode(token, secret, algorithms=["HS256"])
+        if payload["iss"] != "dev.myapp.ai":
             raise ValueError("Invalid issuer")
         return payload
     except jwt.ExpiredSignatureError:
