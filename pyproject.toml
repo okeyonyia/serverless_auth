@@ -8,6 +8,8 @@ packages = [{include = "authorizer_lambda", from = "src"}]
 
 [tool.poetry.dependencies]
 python = ">=3.10,<3.12"
+python-jose = { version = "^3.3", extras = ["cryptography"] }
+requests = "^2.26"
 pydantic = {extras = ["email","dotenv"], version = "^1.10.7"}
 pyjwt = {version = "^2.7.0", extras = ["crypto"]}
 boto3 = "^1.28.3"
